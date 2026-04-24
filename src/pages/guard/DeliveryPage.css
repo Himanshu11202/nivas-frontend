@@ -1,0 +1,147 @@
+/* Delivery Page Styles */
+.delivery-page {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+.delivery-header {
+  margin-bottom: 32px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.back-btn:hover {
+  border-color: #4f46e5;
+  color: #4f46e5;
+  background: #eef2ff;
+}
+
+.delivery-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.delivery-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+/* Success Message */
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: #d1fae5;
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  color: #065f46;
+  font-weight: 600;
+  margin-bottom: 24px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section */
+.delivery-section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 16px;
+}
+
+.section-title svg {
+  color: #4f46e5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .delivery-page {
+    padding: 16px;
+  }
+
+  .delivery-title {
+    font-size: 1.5rem;
+  }
+
+  .delivery-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .back-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .success-message {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animations */
+.delivery-section {
+  animation: fadeIn 0.4s ease;
+}
+
+.delivery-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.delivery-section:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.delivery-section:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
