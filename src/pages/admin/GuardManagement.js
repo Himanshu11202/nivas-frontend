@@ -44,7 +44,7 @@ const GuardManagement = () => {
       console.log('Submitting guard data:', formData);
       
       // Use direct API call to avoid issues
-      const response = await axios.post('http://localhost:8080/api/admin/guards', formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/api/admin/guards`, formData);
       console.log('Guard created response:', response.data);
       
       // Reset form

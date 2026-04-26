@@ -33,7 +33,7 @@ const Login = () => {
       console.log('Login attempt:', formData.email);
       
       // Simple direct API call
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/api/auth/login`, {
         email: formData.email,
         password: formData.password
       });
