@@ -45,11 +45,7 @@
   margin: 0;
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #000000;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -123,10 +119,7 @@
   margin: 0 0 2rem 0;
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #000000;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -196,10 +189,7 @@
   margin: 0 0 2rem 0;
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #000000;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }

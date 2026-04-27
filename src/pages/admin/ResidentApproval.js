@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './ResidentApproval.css';
 
 const ResidentApproval = () => {
   const [pendingResidents, setPendingResidents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPendingResidents();
@@ -23,6 +25,14 @@ const ResidentApproval = () => {
       const response = await axios.post(`/api/admin/residents/${residentId}/approve`);
       fetchPendingResidents();
       alert(response.data.message || 'Resident approved successfully!');
+      
+      // If the approved resident is the current logged-in user, redirect to their dashboard
+      const currentUser = JSON.parse(localStorage.getItem('user'));
+      if (currentUser && currentUser.id === residentId) {
+        currentUser.status = 'ACTIVE';
+        localStorage.setItem('user', JSON.stringify(currentUser));
+        navigate('/resident');
+      }
     } catch (error) {
       console.error('Error approving resident:', error);
       alert(error.response?.data?.error || 'Error approving resident');
