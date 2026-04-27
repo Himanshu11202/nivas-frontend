@@ -40,6 +40,8 @@ const AdminDashboard = () => {
     maintenanceCollection: [],
     userDistribution: []
   });
+  const [showResidentsModal, setShowResidentsModal] = useState(false);
+  const [residents, setResidents] = useState([]);
 
   // Real-time polling setup
   useEffect(() => {
@@ -170,6 +172,7 @@ const AdminDashboard = () => {
       ]);
 
       const residents = residentsRes.status === 'fulfilled' ? residentsRes.value.data : [];
+      setResidents(residents);
       const complaints = complaintsRes.status === 'fulfilled' ? complaintsRes.value.data : [];
       const maintenance = maintenanceRes.status === 'fulfilled' ? maintenanceRes.value.data : [];
 
@@ -292,6 +295,20 @@ const AdminDashboard = () => {
     navigate('/login');
   };
 
+  const handleDeleteResident = async (residentId) => {
+    if (window.confirm('Are you sure you want to delete this resident? This action cannot be undone.')) {
+      try {
+        await axios.delete(`/api/admin/residents/${residentId}`);
+        alert('Resident deleted successfully');
+        fetchRecentActivity();
+        fetchDashboardStats();
+      } catch (error) {
+        console.error('Error deleting resident:', error);
+        alert(error.response?.data?.error || 'Error deleting resident');
+      }
+    }
+  };
+
   const isActivePath = (path) => {
     return location.pathname.includes(path);
   };
@@ -395,7 +412,8 @@ const AdminDashboard = () => {
                         label: 'Total Residents', 
                         change: `+${getGrowthRate(stats.totalResidents, 0)}%`,
                         color: 'blue',
-                        delay: '0s'
+                        delay: '0s',
+                        onClick: () => setShowResidentsModal(true)
                       },
                       { 
                         icon: 'building', 
@@ -448,8 +466,9 @@ const AdminDashboard = () => {
                     ].map((stat, index) => (
                       <div 
                         key={index}
-                        className="modern-card p-6 animate-slide-up"
+                        className={`modern-card p-6 animate-slide-up ${stat.onClick ? 'cursor-pointer hover:scale-105' : ''}`}
                         style={{ animationDelay: stat.delay }}
+                        onClick={stat.onClick}
                       >
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
                           stat.color === 'blue' ? 'bg-blue-100 text-blue-600' :
@@ -629,6 +648,46 @@ const AdminDashboard = () => {
           <Outlet />
         </main>
       </div>
+
+      {/* Residents Modal */}
+      {showResidentsModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-900">All Residents</h2>
+              <button
+                onClick={() => setShowResidentsModal(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl"
+              >
+                ×
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[60vh]">
+              {residents.length === 0 ? (
+                <p className="text-center text-gray-500 py-8">No residents found</p>
+              ) : (
+                <div className="space-y-3">
+                  {residents.map((resident) => (
+                    <div key={resident.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                      <div className="flex-1">
+                        <p className="font-semibold text-gray-900">{resident.name}</p>
+                        <p className="text-sm text-gray-600">{resident.email}</p>
+                        <p className="text-sm text-gray-500">Flat: {resident.flatNumber} | Status: {resident.status}</p>
+                      </div>
+                      <button
+                        onClick={() => handleDeleteResident(resident.id)}
+                        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
