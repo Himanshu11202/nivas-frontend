@@ -34,8 +34,9 @@ const Register = () => {
 
     try {
       console.log('Register attempt:', formData.email);
+      console.log('API URL:', process.env.REACT_APP_API_URL || 'http://localhost:8080');
       
-      // Simple direct API call
+      // Simple direct API call with timeout
       const response = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
@@ -43,6 +44,8 @@ const Register = () => {
         role: formData.role,
         phoneNumber: formData.phoneNumber,
         flatNumber: formData.flatNumber || null
+      }, {
+        timeout: 30000 // 30 seconds timeout
       });
       
       console.log('Register successful:', response.data);
