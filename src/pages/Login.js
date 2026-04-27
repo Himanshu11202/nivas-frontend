@@ -31,11 +31,14 @@ const Login = () => {
 
     try {
       console.log('Login attempt:', formData.email);
+      console.log('API URL:', process.env.REACT_APP_API_URL || 'http://localhost:8080');
       
-      // Simple direct API call
+      // Simple direct API call with timeout
       const response = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/api/auth/login`, {
         email: formData.email,
         password: formData.password
+      }, {
+        timeout: 30000 // 30 seconds timeout
       });
       
       console.log('Login successful:', response.data);
