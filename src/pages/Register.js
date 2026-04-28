@@ -34,10 +34,10 @@ const Register = () => {
 
     try {
       console.log('Register attempt:', formData.email);
-      console.log('API URL:', process.env.REACT_APP_API_URL || 'http://localhost:8080');
+      console.log('API URL:', process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com');
       
       // Simple direct API call with timeout
-      const response = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:8080'}/api/auth/register`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com'}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,
