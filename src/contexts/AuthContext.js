@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 // Set base URL for all API calls
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com';
 
 const AuthContext = createContext();
 
