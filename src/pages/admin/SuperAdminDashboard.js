@@ -6,6 +6,8 @@ const SuperAdminDashboard = () => {
   const [societies, setSocieties] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showSocietyDetails, setShowSocietyDetails] = useState(false);
+  const [selectedSociety, setSelectedSociety] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     location: '',
@@ -56,6 +58,17 @@ const SuperAdminDashboard = () => {
       fetchAdmins();
     } catch (error) {
       alert('Error creating society: ' + (error.response?.data?.error || error.message));
+    }
+  };
+
+  const handleViewSocietyDetails = async (societyId) => {
+    try {
+      const response = await axios.get(`/api/super-admin/societies/${societyId}`);
+      setSelectedSociety(response.data);
+      setShowSocietyDetails(true);
+    } catch (error) {
+      console.error('Error fetching society details:', error);
+      alert('Error fetching society details');
     }
   };
 
@@ -171,7 +184,7 @@ const SuperAdminDashboard = () => {
           <h2>All Societies</h2>
           <div className="societies-grid">
             {societies.map((society) => (
-              <div key={society.id} className="society-card">
+              <div key={society.id} className="society-card clickable" onClick={() => handleViewSocietyDetails(society.id)}>
                 <div className="society-header">
                   <h3>{society.name}</h3>
                   <span className="society-code">{society.societyCode}</span>
@@ -181,6 +194,9 @@ const SuperAdminDashboard = () => {
                 )}
                 <p className="society-date">
                   Created: {new Date(society.createdAt).toLocaleDateString()}
+                </p>
+                <p className="society-status">
+                  Status: {society.subscriptionStatus || 'ACTIVE'}
                 </p>
               </div>
             ))}
@@ -201,6 +217,83 @@ const SuperAdminDashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Society Details Modal */}
+      {showSocietyDetails && selectedSociety && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2>Society Details</h2>
+              <button className="close-btn" onClick={() => setShowSocietyDetails(false)}>×</button>
+            </div>
+            <div className="modal-body">
+              <div className="society-details">
+                <div className="detail-section">
+                  <h3>Society Information</h3>
+                  <div className="detail-grid">
+                    <div className="detail-item">
+                      <span className="label">Name:</span>
+                      <span className="value">{selectedSociety.name}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="label">Code:</span>
+                      <span className="value">{selectedSociety.societyCode}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="label">Location:</span>
+                      <span className="value">{selectedSociety.location || 'N/A'}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="label">Total Flats:</span>
+                      <span className="value">{selectedSociety.totalFlats || 0}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="label">Total Residents:</span>
+                      <span className="value">{selectedSociety.totalResidents || 0}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="label">Subscription Status:</span>
+                      <span className={`value status-badge ${selectedSociety.subscriptionStatus?.toLowerCase()}`}>
+                        {selectedSociety.subscriptionStatus || 'ACTIVE'}
+                      </span>
+                    </div>
+                    {selectedSociety.lastPaymentDate && (
+                      <div className="detail-item">
+                        <span className="label">Last Payment:</span>
+                        <span className="value">{new Date(selectedSociety.lastPaymentDate).toLocaleDateString()}</span>
+                      </div>
+                    )}
+                    {selectedSociety.subscriptionExpiryDate && (
+                      <div className="detail-item">
+                        <span className="label">Expiry Date:</span>
+                        <span className="value">{new Date(selectedSociety.subscriptionExpiryDate).toLocaleDateString()}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="detail-section">
+                  <h3>Billing Summary</h3>
+                  <div className="billing-stats">
+                    <div className="billing-stat">
+                      <span className="stat-label">Total Revenue</span>
+                      <span className="stat-value">₹0</span>
+                    </div>
+                    <div className="billing-stat">
+                      <span className="stat-label">Pending Payments</span>
+                      <span className="stat-value">₹0</span>
+                    </div>
+                    <div className="billing-stat">
+                      <span className="stat-label">Collection Rate</span>
+                      <span className="stat-value">0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
