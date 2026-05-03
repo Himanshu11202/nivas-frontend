@@ -86,7 +86,7 @@ const SuperAdminDashboard = () => {
 
   const handleViewSocietyDetails = async (societyId) => {
     try {
-      const response = await axios.get(`/api/super-admin/societies/${societyId}`);
+      const response = await axios.get(`/api/super-admin/societies/id/${societyId}`);
       setSelectedSociety(response.data);
       setShowSocietyDetails(true);
     } catch (error) {
