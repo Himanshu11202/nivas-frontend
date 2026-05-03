@@ -56,7 +56,11 @@ const Login = () => {
       setUser({ id, email: userEmail, name, role, flatNumber, status });
       
       // Simple navigation
-      if (role === 'ADMIN') {
+      if (role === 'SUPER_ADMIN') {
+        navigate('/super-admin');
+      } else if (role === 'SOCIETY_ADMIN') {
+        navigate('/admin');
+      } else if (role === 'ADMIN') {
         navigate('/admin');
       } else if (role === 'RESIDENT') {
         navigate('/resident');

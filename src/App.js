@@ -17,6 +17,7 @@ import AllBills from './pages/admin/AllBills';
 import AdminMarketplace from './pages/admin/AdminMarketplace';
 import ExpenseManagement from './pages/admin/ExpenseManagement';
 import AdminEventManagement from './pages/admin/AdminEventManagement';
+import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
 import ResidentDashboard from './pages/resident/ResidentDashboard';
 import ResidentComplaintManagement from './pages/resident/ComplaintManagement';
 import ResidentNoticeBoard from './pages/resident/NoticeBoard';
@@ -70,6 +71,12 @@ function App() {
                 <Route path="expenses" element={<ExpenseManagement />} />
                 <Route path="events" element={<AdminEventManagement />} />
               </Route>
+
+              <Route path="/super-admin" element={
+                <ProtectedRoute role="SUPER_ADMIN">
+                  <SuperAdminDashboard />
+                </ProtectedRoute>
+              } />
               
               <Route path="/resident" element={
                 <ProtectedRoute role="RESIDENT">
