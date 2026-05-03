@@ -20,11 +20,11 @@ export const NotificationProvider = ({ children }) => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user) {
-        const response = await axios.get(`/api/${user.role.toLowerCase()}/notifications?userId=${user.id}`);
+        const response = await axios.get(`/api/notifications/user/${user.id}`);
         setNotifications(response.data);
         
-        const unreadResponse = await axios.get(`/api/${user.role.toLowerCase()}/notifications/unread-count?userId=${user.id}`);
-        setUnreadCount(unreadResponse.data);
+        const unreadResponse = await axios.get(`/api/notifications/user/${user.id}/unread-count`);
+        setUnreadCount(unreadResponse.data.count);
       }
     } catch (error) {
       console.error('Error fetching notifications:', error);
@@ -33,7 +33,7 @@ export const NotificationProvider = ({ children }) => {
 
   const markAsRead = async (notificationId) => {
     try {
-      await axios.post(`/api/resident/notifications/${notificationId}/read`);
+      await axios.patch(`/api/notifications/${notificationId}/read`);
       setNotifications(notifications.map(n => 
         n.id === notificationId ? { ...n, isRead: true } : n
       ));
