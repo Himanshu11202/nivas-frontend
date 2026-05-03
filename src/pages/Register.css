@@ -101,3 +101,34 @@
 .login-link:hover {
   color: #9333EA;
 }
+
+.society-search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.society-option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: #1f2937;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+}
+
+.society-option:hover {
+  background: rgba(79, 70, 229, 0.1);
+}
+
+.society-option:last-child {
+  border-bottom: none;
+}

@@ -13,7 +13,17 @@ const ResidentApproval = () => {
 
   const fetchPendingResidents = async () => {
     try {
-      const response = await axios.get('/api/admin/residents/pending');
+      const user = JSON.parse(localStorage.getItem('user'));
+      const role = user?.role;
+
+      let url;
+      if (role === 'SOCIETY_ADMIN') {
+        url = '/api/society-admin/pending-residents';
+      } else {
+        url = '/api/admin/residents/pending';
+      }
+
+      const response = await axios.get(url);
       setPendingResidents(response.data);
     } catch (error) {
       console.error('Error fetching pending residents:', error);
@@ -22,7 +32,17 @@ const ResidentApproval = () => {
 
   const handleApprove = async (residentId) => {
     try {
-      const response = await axios.post(`/api/admin/residents/${residentId}/approve`);
+      const user = JSON.parse(localStorage.getItem('user'));
+      const role = user?.role;
+
+      let url;
+      if (role === 'SOCIETY_ADMIN') {
+        url = `/api/society-admin/residents/${residentId}/approve`;
+      } else {
+        url = `/api/admin/residents/${residentId}/approve`;
+      }
+
+      const response = await axios.post(url);
       fetchPendingResidents();
       alert(response.data.message || 'Resident approved successfully!');
       
@@ -42,7 +62,17 @@ const ResidentApproval = () => {
   const handleReject = async (residentId) => {
     if (window.confirm('Are you sure you want to reject this resident application?')) {
       try {
-        const response = await axios.post(`/api/admin/residents/${residentId}/reject`);
+        const user = JSON.parse(localStorage.getItem('user'));
+        const role = user?.role;
+
+        let url;
+        if (role === 'SOCIETY_ADMIN') {
+          url = `/api/society-admin/residents/${residentId}/reject`;
+        } else {
+          url = `/api/admin/residents/${residentId}/reject`;
+        }
+
+        const response = await axios.post(url);
         fetchPendingResidents();
         alert(response.data.message || 'Resident rejected successfully!');
       } catch (error) {

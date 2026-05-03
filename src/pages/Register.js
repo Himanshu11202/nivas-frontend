@@ -10,11 +10,15 @@ const Register = () => {
     email: '',
     password: '',
     role: 'RESIDENT',
+    societyCode: '',
     flatNumber: '',
     phoneNumber: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [societies, setSocieties] = useState([]);
+  const [showSocietySearch, setShowSocietySearch] = useState(false);
   const { setUser } = useAuth();
   // eslint-disable-next-line no-unused-vars
   const { register } = useAuth();
@@ -25,6 +29,29 @@ const Register = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleSocietySearch = async (query) => {
+    setSearchQuery(query);
+    if (query.length < 2) {
+      setSocieties([]);
+      setShowSocietySearch(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com'}/api/societies/search?query=${query}`);
+      setSocieties(response.data);
+      setShowSocietySearch(true);
+    } catch (error) {
+      console.error('Society search error:', error);
+    }
+  };
+
+  const handleSelectSociety = (society) => {
+    setFormData({ ...formData, societyCode: society.societyCode });
+    setSearchQuery(society.name);
+    setShowSocietySearch(false);
   };
 
   const handleSubmit = async (e) => {
@@ -42,6 +69,7 @@ const Register = () => {
         email: formData.email,
         password: formData.password,
         role: formData.role,
+        societyCode: formData.societyCode,
         phoneNumber: formData.phoneNumber,
         flatNumber: formData.flatNumber || null
       }, {
@@ -157,9 +185,49 @@ const Register = () => {
               required
             >
               <option value="RESIDENT">Resident</option>
+              <option value="SOCIETY_ADMIN">Society Admin</option>
               <option value="ADMIN">Admin</option>
             </select>
           </div>
+
+          {(formData.role === 'SOCIETY_ADMIN' || formData.role === 'RESIDENT') && (
+            <>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="societyCode"
+                  placeholder="Society Code (e.g., SOC12345)"
+                  value={formData.societyCode}
+                  onChange={handleChange}
+                  className="glass-input"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="text"
+                  placeholder="Search Society by Name"
+                  value={searchQuery}
+                  onChange={(e) => handleSocietySearch(e.target.value)}
+                  className="glass-input"
+                />
+                {showSocietySearch && societies.length > 0 && (
+                  <div className="society-search-dropdown">
+                    {societies.map((society) => (
+                      <div
+                        key={society.id}
+                        className="society-option"
+                        onClick={() => handleSelectSociety(society)}
+                      >
+                        {society.name} ({society.societyCode})
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
 
           {(formData.role === 'RESIDENT' || formData.role === 'ADMIN') && (
             <div className="form-group">
