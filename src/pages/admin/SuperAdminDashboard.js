@@ -8,7 +8,11 @@ const SuperAdminDashboard = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    location: ''
+    location: '',
+    adminName: '',
+    adminEmail: '',
+    adminPassword: '',
+    adminPhone: ''
   });
 
   useEffect(() => {
@@ -39,9 +43,17 @@ const SuperAdminDashboard = () => {
     try {
       const response = await axios.post('/api/super-admin/societies', formData);
       alert(response.data.message);
-      setFormData({ name: '', location: '' });
+      setFormData({ 
+        name: '', 
+        location: '',
+        adminName: '',
+        adminEmail: '',
+        adminPassword: '',
+        adminPhone: ''
+      });
       setShowCreateForm(false);
       fetchSocieties();
+      fetchAdmins();
     } catch (error) {
       alert('Error creating society: ' + (error.response?.data?.error || error.message));
     }
@@ -61,8 +73,9 @@ const SuperAdminDashboard = () => {
 
       {showCreateForm && (
         <div className="create-society-form">
-          <h2>Create New Society</h2>
+          <h2>Create New Society + Admin</h2>
           <form onSubmit={handleCreateSociety}>
+            <h3>Society Details</h3>
             <div className="form-group">
               <label>Society Name *</label>
               <input
@@ -71,6 +84,7 @@ const SuperAdminDashboard = () => {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Enter society name"
                 required
+                style={{ color: '#000000' }}
               />
             </div>
             <div className="form-group">
@@ -80,8 +94,53 @@ const SuperAdminDashboard = () => {
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 placeholder="Enter location (optional)"
+                style={{ color: '#000000' }}
               />
             </div>
+
+            <h3>Admin Details (Optional)</h3>
+            <div className="form-group">
+              <label>Admin Name</label>
+              <input
+                type="text"
+                value={formData.adminName}
+                onChange={(e) => setFormData({ ...formData, adminName: e.target.value })}
+                placeholder="Enter admin name"
+                style={{ color: '#000000' }}
+              />
+            </div>
+            <div className="form-group">
+              <label>Admin Email</label>
+              <input
+                type="email"
+                value={formData.adminEmail}
+                onChange={(e) => setFormData({ ...formData, adminEmail: e.target.value })}
+                placeholder="Enter admin email"
+                style={{ color: '#000000' }}
+              />
+            </div>
+            <div className="form-group">
+              <label>Admin Password</label>
+              <input
+                type="password"
+                value={formData.adminPassword}
+                onChange={(e) => setFormData({ ...formData, adminPassword: e.target.value })}
+                placeholder="Enter admin password (min 6 characters)"
+                minLength="6"
+                style={{ color: '#000000' }}
+              />
+            </div>
+            <div className="form-group">
+              <label>Admin Phone</label>
+              <input
+                type="tel"
+                value={formData.adminPhone}
+                onChange={(e) => setFormData({ ...formData, adminPhone: e.target.value })}
+                placeholder="Enter admin phone number"
+                style={{ color: '#000000' }}
+              />
+            </div>
+
             <div className="form-actions">
               <button type="submit" className="btn-primary">Create Society</button>
               <button 

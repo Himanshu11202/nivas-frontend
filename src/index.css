@@ -86,6 +86,8 @@ body {
     @apply w-full px-4 py-3 rounded-xl border border-slate-200;
     @apply transition-all duration-200;
     @apply focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100;
+    color: #000000;
+    background: #ffffff;
   }
   .input-modern:hover { @apply border-slate-300; }
 
