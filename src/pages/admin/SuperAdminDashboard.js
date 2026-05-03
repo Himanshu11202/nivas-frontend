@@ -8,6 +8,13 @@ const SuperAdminDashboard = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [showSocietyDetails, setShowSocietyDetails] = useState(false);
   const [selectedSociety, setSelectedSociety] = useState(null);
+  const [revenueStats, setRevenueStats] = useState({
+    totalSocieties: 0,
+    totalRevenue: 0,
+    pendingPayments: 0,
+    activeSocieties: 0,
+    expiredSocieties: 0
+  });
   const [formData, setFormData] = useState({
     name: '',
     location: '',
@@ -20,6 +27,7 @@ const SuperAdminDashboard = () => {
   useEffect(() => {
     fetchSocieties();
     fetchAdmins();
+    fetchRevenueStats();
   }, []);
 
   const fetchSocieties = async () => {
@@ -37,6 +45,21 @@ const SuperAdminDashboard = () => {
       setAdmins(response.data);
     } catch (error) {
       console.error('Error fetching admins:', error);
+    }
+  };
+
+  const fetchRevenueStats = async () => {
+    try {
+      // Calculate stats from societies data
+      setRevenueStats({
+        totalSocieties: societies.length,
+        totalRevenue: societies.reduce((sum, s) => sum + (s.totalRevenue || 0), 0),
+        pendingPayments: societies.reduce((sum, s) => sum + (s.pendingPayments || 0), 0),
+        activeSocieties: societies.filter(s => s.subscriptionStatus === 'ACTIVE').length,
+        expiredSocieties: societies.filter(s => s.subscriptionStatus === 'EXPIRED' || s.subscriptionStatus === 'BLOCKED').length
+      });
+    } catch (error) {
+      console.error('Error calculating revenue stats:', error);
     }
   };
 
@@ -172,7 +195,23 @@ const SuperAdminDashboard = () => {
         <div className="stats-section">
           <div className="stat-card">
             <h3>Total Societies</h3>
-            <p className="stat-value">{societies.length}</p>
+            <p className="stat-value">{revenueStats.totalSocieties}</p>
+          </div>
+          <div className="stat-card">
+            <h3>Total Revenue</h3>
+            <p className="stat-value">₹{revenueStats.totalRevenue.toLocaleString()}</p>
+          </div>
+          <div className="stat-card">
+            <h3>Pending Payments</h3>
+            <p className="stat-value">₹{revenueStats.pendingPayments.toLocaleString()}</p>
+          </div>
+          <div className="stat-card">
+            <h3>Active Societies</h3>
+            <p className="stat-value">{revenueStats.activeSocieties}</p>
+          </div>
+          <div className="stat-card">
+            <h3>Expired/Blocked</h3>
+            <p className="stat-value">{revenueStats.expiredSocieties}</p>
           </div>
           <div className="stat-card">
             <h3>Total Society Admins</h3>
