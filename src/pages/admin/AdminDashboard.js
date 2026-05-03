@@ -20,6 +20,7 @@ const AdminDashboard = () => {
     totalComplaints: 0,
     pendingComplaints: 0
   });
+  const [society, setSociety] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -69,7 +70,8 @@ const AdminDashboard = () => {
         fetchDashboardStats(),
         fetchWorkerStats(),
         fetchRecentActivity(),
-        fetchAnalyticsData()
+        fetchAnalyticsData(),
+        fetchSociety()
       ]);
       setLastUpdated(new Date());
     } catch (err) {
@@ -272,6 +274,17 @@ const AdminDashboard = () => {
     }
   }, [stats.totalResidents, stats.totalWorkers]);
 
+  const fetchSociety = async () => {
+    try {
+      if (user?.societyId) {
+        const response = await axios.get(`/api/super-admin/societies/${user.societyId}`);
+        setSociety(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching society:', error);
+    }
+  };
+
   // Helper function to format time ago
   const formatTimeAgo = (dateString) => {
     if (!dateString) return 'Unknown';
@@ -348,9 +361,16 @@ const AdminDashboard = () => {
             <div className="animate-fade-in">
               {/* Page Header */}
               <div className="mb-8">
-                <h1 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-2">
-                  Admin Dashboard
-                </h1>
+                <div className="flex items-center gap-3 mb-2">
+                  <h1 className="text-2xl lg:text-3xl font-bold text-slate-900">
+                    Admin Dashboard
+                  </h1>
+                  {society && (
+                    <span className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
+                      {society.name}
+                    </span>
+                  )}
+                </div>
                 <p className="text-slate-500">
                   Welcome back, {user?.name}! Here's your society overview.
                 </p>
