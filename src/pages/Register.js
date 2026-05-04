@@ -20,8 +20,6 @@ const Register = () => {
   const [societies, setSocieties] = useState([]);
   const [showSocietySearch, setShowSocietySearch] = useState(false);
   const { setUser } = useAuth();
-  // eslint-disable-next-line no-unused-vars
-  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -40,7 +38,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com'}/api/societies/search?query=${query}`);
+      const response = await axios.get(`/api/super-admin/societies/search?name=${query}`);
       setSocieties(response.data);
       setShowSocietySearch(true);
     } catch (error) {
@@ -177,71 +175,40 @@ const Register = () => {
           </div>
 
           <div className="form-group">
-            <select
-              name="role"
-              value={formData.role}
+            <input
+              type="text"
+              placeholder="Search Society by Name"
+              value={searchQuery}
+              onChange={(e) => handleSocietySearch(e.target.value)}
+              className="glass-input"
+              required
+            />
+            {showSocietySearch && societies.length > 0 && (
+              <div className="society-search-dropdown">
+                {societies.map((society) => (
+                  <div
+                    key={society.id}
+                    className="society-option"
+                    onClick={() => handleSelectSociety(society)}
+                  >
+                    {society.name} ({society.societyCode})
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              name="flatNumber"
+              placeholder="Flat Number (e.g., A-101)"
+              value={formData.flatNumber}
               onChange={handleChange}
               className="glass-input"
               required
-            >
-              <option value="RESIDENT">Resident</option>
-              <option value="SOCIETY_ADMIN">Society Admin</option>
-              <option value="ADMIN">Admin</option>
-            </select>
+            />
           </div>
-
-          {(formData.role === 'SOCIETY_ADMIN' || formData.role === 'RESIDENT') && (
-            <>
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="societyCode"
-                  placeholder="Society Code (e.g., SOC12345)"
-                  value={formData.societyCode}
-                  onChange={handleChange}
-                  className="glass-input"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="Search Society by Name"
-                  value={searchQuery}
-                  onChange={(e) => handleSocietySearch(e.target.value)}
-                  className="glass-input"
-                />
-                {showSocietySearch && societies.length > 0 && (
-                  <div className="society-search-dropdown">
-                    {societies.map((society) => (
-                      <div
-                        key={society.id}
-                        className="society-option"
-                        onClick={() => handleSelectSociety(society)}
-                      >
-                        {society.name} ({society.societyCode})
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-
-          {(formData.role === 'RESIDENT' || formData.role === 'ADMIN') && (
-            <div className="form-group">
-              <input
-                type="text"
-                name="flatNumber"
-                placeholder="Flat Number (e.g., A-101)"
-                value={formData.flatNumber}
-                onChange={handleChange}
-                className="glass-input"
-                required={formData.role === 'RESIDENT'}
-              />
-            </div>
-          )}
 
           <button
             type="submit"
