@@ -27,8 +27,13 @@ const SuperAdminDashboard = () => {
   useEffect(() => {
     fetchSocieties();
     fetchAdmins();
-    fetchRevenueStats();
   }, []);
+
+  useEffect(() => {
+    if (societies.length > 0) {
+      fetchRevenueStats();
+    }
+  }, [societies]);
 
   const fetchSocieties = async () => {
     try {

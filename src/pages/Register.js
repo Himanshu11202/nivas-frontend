@@ -31,7 +31,7 @@ const Register = () => {
 
   const handleSocietySearch = async (query) => {
     setSearchQuery(query);
-    if (query.length < 2) {
+    if (query.length < 1) {
       setSocieties([]);
       setShowSocietySearch(false);
       return;
@@ -177,11 +177,22 @@ const Register = () => {
           <div className="form-group">
             <input
               type="text"
+              name="societyCode"
+              placeholder="Society Code"
+              value={formData.societyCode}
+              onChange={handleChange}
+              className="glass-input"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
               placeholder="Search Society by Name"
               value={searchQuery}
               onChange={(e) => handleSocietySearch(e.target.value)}
               className="glass-input"
-              required
             />
             {showSocietySearch && societies.length > 0 && (
               <div className="society-search-dropdown">

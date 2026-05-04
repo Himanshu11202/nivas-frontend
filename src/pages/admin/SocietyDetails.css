@@ -330,6 +330,42 @@
   font-weight: 500;
 }
 
+/* Admin Section */
+.admin-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.admin-section h2 {
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.admin-section .admin-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: white;
+}
+
+.admin-section .admin-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.admin-section .admin-card p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.admin-section .admin-card strong {
+  font-weight: 600;
+}
+
 /* Members Section */
 .members-section {
   background: white;

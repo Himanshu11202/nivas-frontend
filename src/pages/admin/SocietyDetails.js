@@ -7,6 +7,7 @@ const SocietyDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [society, setSociety] = useState(null);
+  const [societyAdmin, setSocietyAdmin] = useState(null);
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -30,7 +31,10 @@ const SocietyDetails = () => {
   const fetchSocietyMembers = async () => {
     try {
       const response = await axios.get(`/api/super-admin/societies/${id}/members`);
-      setMembers(response.data || []);
+      const allMembers = response.data || [];
+      const adminMember = allMembers.find(m => m.role === 'SOCIETY_ADMIN');
+      setMembers(allMembers);
+      setSocietyAdmin(adminMember);
     } catch (error) {
       console.error('Error fetching members:', error);
       setMembers([]);
@@ -243,6 +247,21 @@ const SocietyDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Society Admin Section */}
+      {societyAdmin && (
+        <div className="admin-section">
+          <h2>Society Admin Details</h2>
+          <div className="admin-card">
+            <h3>{societyAdmin.name}</h3>
+            <p><strong>Email:</strong> {societyAdmin.email}</p>
+            <p><strong>Phone:</strong> {societyAdmin.phoneNumber || 'N/A'}</p>
+            <p><strong>Flat:</strong> {societyAdmin.flatNumber || 'N/A'}</p>
+            <p><strong>Role:</strong> {societyAdmin.role}</p>
+            <p><strong>Status:</strong> {societyAdmin.status}</p>
+          </div>
+        </div>
+      )}
 
       {/* Members Section */}
       <div className="members-section">
