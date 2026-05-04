@@ -31,18 +31,35 @@ const Register = () => {
 
   const handleSocietySearch = async (query) => {
     setSearchQuery(query);
-    if (query.length < 1) {
-      setSocieties([]);
-      setShowSocietySearch(false);
-      return;
+    if (query.length === 0) {
+      // Load all societies when empty
+      try {
+        const response = await axios.get('/api/super-admin/societies');
+        setSocieties(response.data);
+        setShowSocietySearch(true);
+      } catch (error) {
+        console.error('Error fetching societies:', error);
+      }
+    } else {
+      // Filter by name when searching
+      try {
+        const response = await axios.get(`/api/super-admin/societies/search?name=${query}`);
+        setSocieties(response.data);
+        setShowSocietySearch(true);
+      } catch (error) {
+        console.error('Society search error:', error);
+      }
     }
+  };
 
+  const handleSocietyInputFocus = async () => {
+    // Load all societies when input is focused
     try {
-      const response = await axios.get(`/api/super-admin/societies/search?name=${query}`);
+      const response = await axios.get('/api/super-admin/societies');
       setSocieties(response.data);
       setShowSocietySearch(true);
     } catch (error) {
-      console.error('Society search error:', error);
+      console.error('Error fetching societies:', error);
     }
   };
 
@@ -192,6 +209,7 @@ const Register = () => {
               placeholder="Search Society by Name"
               value={searchQuery}
               onChange={(e) => handleSocietySearch(e.target.value)}
+              onFocus={handleSocietyInputFocus}
               className="glass-input"
             />
             {showSocietySearch && societies.length > 0 && (
