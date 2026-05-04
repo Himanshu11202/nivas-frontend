@@ -18,6 +18,8 @@ import AdminMarketplace from './pages/admin/AdminMarketplace';
 import ExpenseManagement from './pages/admin/ExpenseManagement';
 import AdminEventManagement from './pages/admin/AdminEventManagement';
 import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
+import SocietyDetails from './pages/admin/SocietyDetails';
+import MaintenanceCollectionDashboard from './pages/admin/MaintenanceCollectionDashboard';
 import ResidentDashboard from './pages/resident/ResidentDashboard';
 import ResidentComplaintManagement from './pages/resident/ComplaintManagement';
 import ResidentNoticeBoard from './pages/resident/NoticeBoard';
@@ -75,6 +77,16 @@ function App() {
               <Route path="/super-admin" element={
                 <ProtectedRoute role="SUPER_ADMIN">
                   <SuperAdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/super-admin/society/:id" element={
+                <ProtectedRoute role="SUPER_ADMIN">
+                  <SocietyDetails />
+                </ProtectedRoute>
+              } />
+              <Route path="/super-admin/maintenance-collection" element={
+                <ProtectedRoute role="SUPER_ADMIN">
+                  <MaintenanceCollectionDashboard />
                 </ProtectedRoute>
               } />
               

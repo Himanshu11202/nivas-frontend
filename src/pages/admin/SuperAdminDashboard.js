@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SuperAdminDashboard.css';
 
 const SuperAdminDashboard = () => {
+  const navigate = useNavigate();
   const [societies, setSocieties] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [showSocietyDetails, setShowSocietyDetails] = useState(false);
-  const [selectedSociety, setSelectedSociety] = useState(null);
   const [revenueStats, setRevenueStats] = useState({
     totalSocieties: 0,
     totalRevenue: 0,
@@ -79,32 +79,34 @@ const SuperAdminDashboard = () => {
       setShowCreateForm(false);
       fetchSocieties();
       fetchAdmins();
+      fetchRevenueStats();
     } catch (error) {
       alert('Error creating society: ' + (error.response?.data?.error || error.message));
     }
   };
 
-  const handleViewSocietyDetails = async (societyId) => {
-    try {
-      const response = await axios.get(`/api/super-admin/societies/id/${societyId}`);
-      setSelectedSociety(response.data);
-      setShowSocietyDetails(true);
-    } catch (error) {
-      console.error('Error fetching society details:', error);
-      alert('Error fetching society details');
-    }
+  const handleViewSocietyDetails = (societyId) => {
+    navigate(`/super-admin/society/${societyId}`);
   };
 
   return (
     <div className="super-admin-dashboard">
       <div className="dashboard-header">
         <h1>Super Admin Dashboard</h1>
-        <button 
-          className="btn-primary"
-          onClick={() => setShowCreateForm(!showCreateForm)}
-        >
-          {showCreateForm ? 'Cancel' : '+ Create Society'}
-        </button>
+        <div className="header-buttons">
+          <button 
+            className="btn-secondary"
+            onClick={() => navigate('/super-admin/maintenance-collection')}
+          >
+            Maintenance Collection
+          </button>
+          <button 
+            className="btn-primary"
+            onClick={() => setShowCreateForm(!showCreateForm)}
+          >
+            {showCreateForm ? 'Close Form' : '+ Create Society'}
+          </button>
+        </div>
       </div>
 
       {showCreateForm && (
@@ -256,83 +258,6 @@ const SuperAdminDashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Society Details Modal */}
-      {showSocietyDetails && selectedSociety && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2>Society Details</h2>
-              <button className="close-btn" onClick={() => setShowSocietyDetails(false)}>×</button>
-            </div>
-            <div className="modal-body">
-              <div className="society-details">
-                <div className="detail-section">
-                  <h3>Society Information</h3>
-                  <div className="detail-grid">
-                    <div className="detail-item">
-                      <span className="label">Name:</span>
-                      <span className="value">{selectedSociety.name}</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="label">Code:</span>
-                      <span className="value">{selectedSociety.societyCode}</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="label">Location:</span>
-                      <span className="value">{selectedSociety.location || 'N/A'}</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="label">Total Flats:</span>
-                      <span className="value">{selectedSociety.totalFlats || 0}</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="label">Total Residents:</span>
-                      <span className="value">{selectedSociety.totalResidents || 0}</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="label">Subscription Status:</span>
-                      <span className={`value status-badge ${selectedSociety.subscriptionStatus?.toLowerCase()}`}>
-                        {selectedSociety.subscriptionStatus || 'ACTIVE'}
-                      </span>
-                    </div>
-                    {selectedSociety.lastPaymentDate && (
-                      <div className="detail-item">
-                        <span className="label">Last Payment:</span>
-                        <span className="value">{new Date(selectedSociety.lastPaymentDate).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                    {selectedSociety.subscriptionExpiryDate && (
-                      <div className="detail-item">
-                        <span className="label">Expiry Date:</span>
-                        <span className="value">{new Date(selectedSociety.subscriptionExpiryDate).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="detail-section">
-                  <h3>Billing Summary</h3>
-                  <div className="billing-stats">
-                    <div className="billing-stat">
-                      <span className="stat-label">Total Revenue</span>
-                      <span className="stat-value">₹0</span>
-                    </div>
-                    <div className="billing-stat">
-                      <span className="stat-label">Pending Payments</span>
-                      <span className="stat-value">₹0</span>
-                    </div>
-                    <div className="billing-stat">
-                      <span className="stat-label">Collection Rate</span>
-                      <span className="stat-value">0%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
