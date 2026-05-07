@@ -64,9 +64,9 @@ const Register = () => {
   };
 
   const handleSelectSociety = (society) => {
-    setFormData({ ...formData, societyCode: society.societyCode });
     setSearchQuery(society.name);
     setShowSocietySearch(false);
+    // Don't auto-fill society code - user will fill it manually
   };
 
   const handleSubmit = async (e) => {
