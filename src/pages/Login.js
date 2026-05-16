@@ -33,42 +33,61 @@ const Login = () => {
       console.log('Login attempt:', formData.email);
       console.log('API URL:', process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com');
       
-      // Simple direct API call with timeout
-      const response = await axios.post(`${process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com'}/api/auth/login`, {
-        email: formData.email,
-        password: formData.password
-      }, {
-        timeout: 30000 // 30 seconds timeout
-      });
+      // API call with increased timeout and retry logic
+      const maxRetries = 3;
+      let lastError = null;
       
-      console.log('Login successful:', response.data);
-      
-      const { token, id, email: userEmail, name, role, flatNumber, status } = response.data;
-      
-      // Save to localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify({ id, email: userEmail, name, role, flatNumber, status }));
-      
-      // Set axios headers
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
-      // Update AuthContext
-      setUser({ id, email: userEmail, name, role, flatNumber, status });
-      
-      // Simple navigation
-      if (role === 'SUPER_ADMIN') {
-        navigate('/super-admin');
-      } else if (role === 'SOCIETY_ADMIN') {
-        navigate('/admin');
-      } else if (role === 'ADMIN') {
-        navigate('/admin');
-      } else if (role === 'RESIDENT') {
-        navigate('/resident');
-      } else if (role === 'GUARD') {
-        navigate('/guard');
-      } else {
-        navigate('/login');
+      for (let i = 0; i < maxRetries; i++) {
+        try {
+          const response = await axios.post(`${process.env.REACT_APP_API_URL || 'https://nivas-backend-we28.onrender.com'}/api/auth/login`, {
+            email: formData.email,
+            password: formData.password
+          }, {
+            timeout: 60000 // 60 seconds timeout
+          });
+          
+          console.log('Login successful:', response.data);
+          
+          const { token, id, email: userEmail, name, role, flatNumber, status } = response.data;
+          
+          // Save to localStorage
+          localStorage.setItem('token', token);
+          localStorage.setItem('user', JSON.stringify({ id, email: userEmail, name, role, flatNumber, status }));
+          
+          // Set axios headers
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          
+          // Update AuthContext
+          setUser({ id, email: userEmail, name, role, flatNumber, status });
+          
+          // Simple navigation
+          if (role === 'SUPER_ADMIN') {
+            navigate('/super-admin');
+          } else if (role === 'SOCIETY_ADMIN') {
+            navigate('/admin');
+          } else if (role === 'ADMIN') {
+            navigate('/admin');
+          } else if (role === 'RESIDENT') {
+            navigate('/resident');
+          } else if (role === 'GUARD') {
+            navigate('/guard');
+          } else {
+            navigate('/login');
+          }
+          
+          return; // Success, exit retry loop
+        } catch (error) {
+          lastError = error;
+          console.error(`Login attempt ${i + 1} failed:`, error);
+          if (i < maxRetries - 1) {
+            // Wait before retrying (exponential backoff)
+            await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+          }
+        }
       }
+      
+      // All retries failed
+      throw lastError;
       
     } catch (error) {
       console.error('Login error:', error);

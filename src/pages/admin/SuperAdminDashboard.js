@@ -8,6 +8,7 @@ const SuperAdminDashboard = () => {
   const [societies, setSocieties] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
   const [revenueStats, setRevenueStats] = useState({
     totalSocieties: 0,
     totalRevenue: 0,
@@ -70,6 +71,7 @@ const SuperAdminDashboard = () => {
 
   const handleCreateSociety = async (e) => {
     e.preventDefault();
+    setIsCreating(true);
     try {
       const response = await axios.post('/api/super-admin/societies', formData);
       alert(response.data.message);
@@ -87,6 +89,8 @@ const SuperAdminDashboard = () => {
       fetchRevenueStats();
     } catch (error) {
       alert('Error creating society: ' + (error.response?.data?.error || error.message));
+    } finally {
+      setIsCreating(false);
     }
   };
 
@@ -185,11 +189,18 @@ const SuperAdminDashboard = () => {
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="btn-primary">Create Society</button>
+              <button 
+                type="submit" 
+                className="btn-primary" 
+                disabled={isCreating}
+              >
+                {isCreating ? 'Creating...' : 'Create Society'}
+              </button>
               <button 
                 type="button" 
                 className="btn-secondary"
                 onClick={() => setShowCreateForm(false)}
+                disabled={isCreating}
               >
                 Cancel
               </button>
