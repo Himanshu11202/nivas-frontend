@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NotificationDropdown from '../NotificationDropdown';
 import './AdminHeader.css';
 
-const AdminHeader = ({ user, handleLogout, sidebarOpen, setSidebarOpen }) => {
+const AdminHeader = ({ user, societyName, handleLogout, sidebarOpen, setSidebarOpen }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   return (

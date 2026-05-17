@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { getStoredUser, refreshUserProfile } from '../../utils/authStorage';
 import axios from 'axios';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import AdminHeader from '../../components/admin/AdminHeader';
@@ -24,7 +25,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
-  const { user, logout } = useAuth();
+  const { user, setUser, logout } = useAuth();
   const intervalRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,16 +45,24 @@ const AdminDashboard = () => {
   const [showResidentsModal, setShowResidentsModal] = useState(false);
   const [residents, setResidents] = useState([]);
 
-  // Real-time polling setup
+  // Load profile + society, then poll dashboard data
   useEffect(() => {
-    // Initial fetch
-    fetchAllData();
-    
-    // Set up polling every 5 seconds for real-time updates
+    const initDashboard = async () => {
+      try {
+        const profile = await refreshUserProfile();
+        if (profile) setUser(profile);
+      } catch (err) {
+        console.error('Profile refresh failed:', err);
+      }
+      fetchAllData();
+    };
+
+    initDashboard();
+
     intervalRef.current = setInterval(() => {
-      fetchAllData(false); // false = silent refresh (no loading spinner)
+      fetchAllData(false);
     }, 5000);
-    
+
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -276,10 +285,20 @@ const AdminDashboard = () => {
 
   const fetchSociety = async () => {
     try {
-      if (user?.societyId) {
-        const response = await axios.get(`/api/super-admin/societies/id/${user.societyId}`);
-        setSociety(response.data);
+      const currentUser = user || getStoredUser();
+      if (!currentUser?.societyId) return;
+
+      if (currentUser.societyName) {
+        setSociety({
+          id: currentUser.societyId,
+          name: currentUser.societyName,
+          societyCode: currentUser.societyCode
+        });
+        return;
       }
+
+      const response = await axios.get(`/api/super-admin/societies/id/${currentUser.societyId}`);
+      setSociety(response.data);
     } catch (error) {
       console.error('Error fetching society:', error);
     }
@@ -344,6 +363,7 @@ const AdminDashboard = () => {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
         isActivePath={isActivePath}
+        societyName={society?.name || user?.societyName}
       />
       
       <div className={`transition-all duration-300 ${
@@ -351,6 +371,7 @@ const AdminDashboard = () => {
       }`}>
         <AdminHeader
           user={user}
+          societyName={society?.name || user?.societyName}
           handleLogout={handleLogout}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -363,16 +384,16 @@ const AdminDashboard = () => {
               <div className="mb-8">
                 <div className="flex items-center gap-3 mb-2">
                   <h1 className="text-2xl lg:text-3xl font-bold text-slate-900">
-                    Admin Dashboard
+                    {(society?.name || user?.societyName) || 'Admin Dashboard'}
                   </h1>
-                  {society && (
+                  {(society?.name || user?.societyName) && (
                     <span className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
-                      {society.name}
+                      Society Admin
                     </span>
                   )}
                 </div>
                 <p className="text-slate-500">
-                  Welcome back, {user?.name}! Here's your society overview.
+                  Welcome back, {user?.name}! Manage your society from here.
                 </p>
               </div>
 

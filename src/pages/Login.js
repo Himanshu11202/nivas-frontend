@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
-import { getRouteForRole, saveAuthSession } from '../utils/authStorage';
+import { getRouteForRole, saveAuthSession, refreshUserProfile } from '../utils/authStorage';
 import './Login.css';
 
 const Login = () => {
@@ -48,12 +48,18 @@ const Login = () => {
           
           console.log('Login successful:', response.data);
           
-          const userPayload = saveAuthSession(response.data);
-          const { role } = response.data;
-
+          saveAuthSession(response.data);
           axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
+          let userPayload;
+          try {
+            userPayload = await refreshUserProfile();
+          } catch {
+            userPayload = saveAuthSession(response.data);
+          }
           setUser(userPayload);
 
+          const role = userPayload?.role || response.data.role;
           const route = getRouteForRole(role);
           if (!route) {
             setError(`Login OK but role "${role || 'unknown'}" is not supported. Contact admin.`);
