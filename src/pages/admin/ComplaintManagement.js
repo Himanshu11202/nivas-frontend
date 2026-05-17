@@ -21,7 +21,7 @@ const ComplaintManagement = () => {
   const fetchComplaints = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/complaints');
+      const response = await axios.get('/api/admin/complaints');
       setComplaints(response.data);
     } catch (error) {
       console.error('Error fetching complaints:', error);
@@ -33,7 +33,7 @@ const ComplaintManagement = () => {
   const updateComplaintStatus = async (complaintId, newStatus) => {
     try {
       setUpdatingId(complaintId);
-      await axios.put(`/api/complaints/${complaintId}`, { status: newStatus });
+      await axios.patch(`/api/admin/complaints/${complaintId}/status`, { status: newStatus });
       fetchComplaints();
       alert('Complaint status updated successfully!');
     } catch (error) {
