@@ -57,7 +57,7 @@ const SocietyDetails = () => {
     try {
       await axios.delete(`/api/super-admin/societies/${id}`);
       alert('Society deleted successfully!');
-      navigate('/super-admin/dashboard');
+      navigate('/super-admin');
     } catch (error) {
       alert('Error deleting society: ' + (error.response?.data?.error || error.message));
     }

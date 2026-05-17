@@ -74,7 +74,10 @@ const SuperAdminDashboard = () => {
     setIsCreating(true);
     try {
       const response = await axios.post('/api/super-admin/societies', formData);
-      alert(response.data.message);
+      const adminMsg = response.data.admin
+        ? `\nSociety Admin login:\nEmail: ${response.data.admin.email}\n(Password: jo aapne form mein diya)`
+        : '';
+      alert(response.data.message + adminMsg);
       setFormData({ 
         name: '', 
         location: '',
@@ -145,35 +148,38 @@ const SuperAdminDashboard = () => {
               />
             </div>
 
-            <h3>Admin Details (Optional)</h3>
+            <h3>Society Admin (Login ke liye zaroori)</h3>
             <div className="form-group">
-              <label>Admin Name</label>
+              <label>Admin Name *</label>
               <input
                 type="text"
                 value={formData.adminName}
                 onChange={(e) => setFormData({ ...formData, adminName: e.target.value })}
                 placeholder="Enter admin name"
+                required
                 style={{ color: '#000000' }}
               />
             </div>
             <div className="form-group">
-              <label>Admin Email</label>
+              <label>Admin Email *</label>
               <input
                 type="email"
                 value={formData.adminEmail}
                 onChange={(e) => setFormData({ ...formData, adminEmail: e.target.value })}
                 placeholder="Enter admin email"
+                required
                 style={{ color: '#000000' }}
               />
             </div>
             <div className="form-group">
-              <label>Admin Password</label>
+              <label>Admin Password *</label>
               <input
                 type="password"
                 value={formData.adminPassword}
                 onChange={(e) => setFormData({ ...formData, adminPassword: e.target.value })}
                 placeholder="Enter admin password (min 6 characters)"
                 minLength="6"
+                required
                 style={{ color: '#000000' }}
               />
             </div>

@@ -277,7 +277,7 @@ const AdminDashboard = () => {
   const fetchSociety = async () => {
     try {
       if (user?.societyId) {
-        const response = await axios.get(`/api/super-admin/societies/${user.societyId}`);
+        const response = await axios.get(`/api/super-admin/societies/id/${user.societyId}`);
         setSociety(response.data);
       }
     } catch (error) {

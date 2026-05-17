@@ -48,17 +48,19 @@ const Login = () => {
           
           console.log('Login successful:', response.data);
           
-          const { token, id, email: userEmail, name, role, flatNumber, status } = response.data;
+          const { token, id, email: userEmail, name, role, flatNumber, status, societyId } = response.data;
+          
+          const userPayload = { id, email: userEmail, name, role, flatNumber, status, societyId };
           
           // Save to localStorage
           localStorage.setItem('token', token);
-          localStorage.setItem('user', JSON.stringify({ id, email: userEmail, name, role, flatNumber, status }));
+          localStorage.setItem('user', JSON.stringify(userPayload));
           
           // Set axios headers
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           
           // Update AuthContext
-          setUser({ id, email: userEmail, name, role, flatNumber, status });
+          setUser(userPayload);
           
           // Simple navigation
           if (role === 'SUPER_ADMIN') {

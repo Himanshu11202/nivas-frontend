@@ -51,13 +51,14 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await axios.post('/api/auth/login', { email, password });
-      const { token, id, email: userEmail, name, role, flatNumber, status } = response.data;
+      const { token, id, email: userEmail, name, role, flatNumber, status, societyId } = response.data;
+      const userPayload = { id, email: userEmail, name, role, flatNumber, status, societyId };
       
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify({ id, email: userEmail, name, role, flatNumber, status }));
+      localStorage.setItem('user', JSON.stringify(userPayload));
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
-      setUser({ id, email: userEmail, name, role, flatNumber, status });
+      setUser(userPayload);
       return response.data;
     } catch (error) {
       throw error.response?.data?.message || 'Login failed';
@@ -70,13 +71,14 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post('/api/auth/register', userData);
       console.log('AuthContext: Registration response:', response.data);
       
-      const { token, id, email: userEmail, name, role, flatNumber, status } = response.data;
+      const { token, id, email: userEmail, name, role, flatNumber, status, societyId } = response.data;
+      const userPayload = { id, email: userEmail, name, role, flatNumber, status, societyId };
       
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify({ id, email: userEmail, name, role, flatNumber, status }));
+      localStorage.setItem('user', JSON.stringify(userPayload));
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
-      setUser({ id, email: userEmail, name, role, flatNumber, status });
+      setUser(userPayload);
       return response.data;
     } catch (error) {
       console.error('AuthContext: Registration error:', error);
