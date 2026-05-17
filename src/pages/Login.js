@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-// eslint-disable-next-line no-unused-vars
 import axios from 'axios';
+import { getRouteForRole, saveAuthSession } from '../utils/authStorage';
 import './Login.css';
 
 const Login = () => {
@@ -48,36 +48,20 @@ const Login = () => {
           
           console.log('Login successful:', response.data);
           
-          const { token, id, email: userEmail, name, role, flatNumber, status, societyId } = response.data;
-          
-          const userPayload = { id, email: userEmail, name, role, flatNumber, status, societyId };
-          
-          // Save to localStorage
-          localStorage.setItem('token', token);
-          localStorage.setItem('user', JSON.stringify(userPayload));
-          
-          // Set axios headers
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          
-          // Update AuthContext
+          const userPayload = saveAuthSession(response.data);
+          const { role } = response.data;
+
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
           setUser(userPayload);
-          
-          // Simple navigation
-          if (role === 'SUPER_ADMIN') {
-            navigate('/super-admin');
-          } else if (role === 'SOCIETY_ADMIN') {
-            navigate('/admin');
-          } else if (role === 'ADMIN') {
-            navigate('/admin');
-          } else if (role === 'RESIDENT') {
-            navigate('/resident');
-          } else if (role === 'GUARD') {
-            navigate('/guard');
-          } else {
-            navigate('/login');
+
+          const route = getRouteForRole(role);
+          if (!route) {
+            setError(`Login OK but role "${role || 'unknown'}" is not supported. Contact admin.`);
+            return;
           }
-          
-          return; // Success, exit retry loop
+
+          navigate(route, { replace: true });
+          return;
         } catch (error) {
           lastError = error;
           console.error(`Login attempt ${i + 1} failed:`, error);
