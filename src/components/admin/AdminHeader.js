@@ -29,8 +29,10 @@ const AdminHeader = ({ user, societyName, handleLogout, sidebarOpen, setSidebarO
           </button>
 
           <div className="hidden md:block">
-            <h1 className="text-lg font-semibold text-slate-800">Admin Dashboard</h1>
-            <p className="text-xs text-slate-500">Welcome back, {user?.name?.split(' ')[0] || 'Admin'}</p>
+            <h1 className="text-lg font-semibold text-slate-800">{societyName || 'Admin Dashboard'}</h1>
+            <p className="text-xs text-slate-500">
+              {societyName ? `Society Admin · ${user?.name?.split(' ')[0] || 'Admin'}` : `Welcome back, ${user?.name?.split(' ')[0] || 'Admin'}`}
+            </p>
           </div>
         </div>
 
