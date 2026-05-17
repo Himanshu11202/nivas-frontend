@@ -59,7 +59,7 @@ function App() {
                   <AdminDashboard />
                 </ProtectedRoute>
               }>
-                <Route index element={<div style={{padding: '20px'}}><h2>Welcome to Admin Dashboard</h2><p>Select an option from the sidebar.</p></div>} />
+                <Route index element={null} />
                 <Route path="residents" element={<ResidentApproval />} />
                 <Route path="workers" element={<WorkerManagement />} />
                 <Route path="guards" element={<GuardManagement />} />
