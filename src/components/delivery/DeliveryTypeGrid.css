@@ -1,11 +1,11 @@
-/* Delivery Type Grid Styles */
+/* Premium Modern Delivery Type Grid Styles */
 .delivery-type-grid {
-  padding: 20px 0;
+  padding: 1rem 0;
 }
 
 /* Search Bar */
 .search-container {
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 
 .search-input-wrapper {
@@ -16,67 +16,70 @@
 
 .search-icon {
   position: absolute;
-  left: 16px;
-  color: #9ca3af;
+  left: 1rem;
+  color: #94a3b8;
   pointer-events: none;
 }
 
 .search-input {
   width: 100%;
-  padding: 14px 16px 14px 48px;
-  font-size: 1rem;
-  border: 2px solid #e5e7eb;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  font-size: 0.95rem;
+  border: 1.5px solid #e2e8f0;
   border-radius: 12px;
-  background: white;
-  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.8);
+  color: #1e293b;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  background: #ffffff;
 }
 
 .search-input::placeholder {
-  color: #9ca3af;
+  color: #94a3b8;
 }
 
 .clear-search {
   position: absolute;
-  right: 12px;
+  right: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #f3f4f6;
+  background: #f1f5f9;
   border: none;
-  color: #6b7280;
+  color: #64748b;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .clear-search:hover {
-  background: #e5e7eb;
-  color: #374151;
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
 /* Apps Section */
 .apps-section {
-  margin-bottom: 28px;
+  margin-bottom: 2rem;
 }
 
 .section-label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #6b7280;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .section-label svg {
@@ -87,51 +90,55 @@
 .apps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 16px;
+  gap: 1rem;
 }
 
 .delivery-app-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 12px;
-  background: white;
-  border: 2px solid #e5e7eb;
-  border-radius: 16px;
+  padding: 1.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .delivery-app-card:hover {
-  border-color: #4f46e5;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: #6366f1;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .delivery-app-card.selected {
-  border-color: #4f46e5;
-  background: #eef2ff;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: #6366f1;
+  background: #ede9fe;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 .app-logo-container {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  background: #f9fafb;
+  margin-bottom: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
   overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .app-logo {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 8px;
+  padding: 6px;
 }
 
 .app-logo-fallback {
@@ -140,16 +147,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #4f46e5;
-  background: #e0e7ff;
+  background: #ede9fe;
 }
 
 .app-name {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #374151;
+  color: #334155;
   text-align: center;
   line-height: 1.2;
 }
@@ -162,23 +169,23 @@
   color: white;
   font-size: 0.65rem;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 2px 6px;
   border-radius: 20px;
   text-transform: uppercase;
 }
 
 /* Popular Apps - Larger Cards */
 .popular-apps .delivery-app-card {
-  padding: 20px 16px;
+  padding: 1.5rem 1rem;
 }
 
 .popular-apps .app-logo-container {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
 }
 
 .popular-apps .app-name {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 /* No Results */
@@ -186,78 +193,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
-  color: #9ca3af;
+  padding: 3rem 1.5rem;
+  color: #64748b;
+  text-align: center;
 }
 
 .no-results svg {
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
+  color: #cbd5e1;
 }
 
 .no-results p {
-  font-size: 1rem;
-  margin-bottom: 16px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
 }
 
 .clear-search-btn {
-  padding: 10px 20px;
-  background: #4f46e5;
+  padding: 0.625rem 1.25rem;
+  background: #0f172a;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
+  font-size: 0.875rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .clear-search-btn:hover {
-  background: #4338ca;
+  background: #1e293b;
+  transform: translateY(-1px);
 }
 
 /* Mobile Responsive */
 @media (max-width: 640px) {
   .apps-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  .delivery-app-card {
-    padding: 12px 8px;
-  }
-
-  .app-logo-container {
-    width: 48px;
-    height: 48px;
-  }
-
-  .app-name {
-    font-size: 0.75rem;
-  }
-
-  .popular-apps .delivery-app-card {
-    padding: 16px 12px;
-  }
-
-  .popular-apps .app-logo-container {
-    width: 56px;
-    height: 56px;
-  }
-}
-
-/* Tablet */
-@media (min-width: 641px) and (max-width: 1024px) {
-  .apps-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Desktop */
-@media (min-width: 1025px) {
-  .apps-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .popular-apps {
-    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
   }
 }

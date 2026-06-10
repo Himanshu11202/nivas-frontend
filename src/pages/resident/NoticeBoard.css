@@ -1,44 +1,35 @@
 .notice-board {
-  padding: 2rem;
+  padding: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.page-header {
-  margin-bottom: 2rem;
+.notice-board .page-header {
+  @apply page-header;
 }
 
-.page-header h2 {
-  color: #1F2937;
-  font-size: 1.5rem;
-  font-weight: 700;
+.notice-board .page-header h2 {
+  @apply page-title;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .notices-container {
   margin-top: 2rem;
 }
 
-.empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.notice-board .empty-state {
+  @apply empty-state;
 }
 
-.empty-icon {
-  color: #9CA3AF;
-  margin-bottom: 1rem;
+.notice-board .empty-state h3 {
+  @apply empty-state-title;
 }
 
-.empty-state h3 {
-  color: #6B7280;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.empty-state p {
-  color: #9CA3AF;
-  font-size: 0.875rem;
+.notice-board .empty-state p {
+  @apply empty-state-desc;
 }
 
 .notices-list {
@@ -48,13 +39,8 @@
 }
 
 .notice-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border-left: 4px solid #4F46E5;
-  animation: slideUp 0.5s ease forwards;
+  @apply modern-card p-8 border-l-4 border-l-indigo-500 bg-white/80;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -66,32 +52,23 @@
   }
 }
 
-.notice-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-
 .notice-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .notice-title-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .notice-title {
-  color: #1F2937;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin: 0;
+  @apply text-lg font-bold text-slate-800 tracking-tight leading-snug;
 }
 
 .notice-meta {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -99,19 +76,16 @@
 .notice-time {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #6B7280;
-  font-size: 0.875rem;
-  font-weight: 500;
+  gap: 0.35rem;
+  @apply text-xs font-semibold text-slate-400 uppercase tracking-wide;
 }
 
 .notice-content {
-  margin-bottom: 1.5rem;
+  @apply mb-6;
 }
 
 .notice-text {
-  color: #4B5563;
-  line-height: 1.6;
+  @apply text-sm text-slate-500 leading-relaxed font-medium;
 }
 
 .notice-text p {
@@ -125,22 +99,12 @@
 .notice-footer {
   display: flex;
   justify-content: flex-end;
-  padding-top: 1rem;
-  border-top: 1px solid #E5E7EB;
+  padding-top: 1.25rem;
+  @apply border-t border-slate-100/80;
 }
 
 .notice-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  color: white;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-150 uppercase tracking-wider shadow-sm shadow-indigo-500/5;
 }
 
 @media (max-width: 768px) {

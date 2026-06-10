@@ -1,62 +1,36 @@
-/* Delivery Page Styles */
 .delivery-page {
-  padding: 24px;
+  padding: 2.5rem;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Header */
 .delivery-header {
-  margin-bottom: 32px;
+  @apply page-header flex-col items-start gap-4 mb-8;
 }
 
 .back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  background: white;
-  border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 20px;
-}
-
-.back-btn:hover {
-  border-color: #4f46e5;
-  color: #4f46e5;
-  background: #eef2ff;
+  @apply btn-modern-secondary py-2 px-3 text-xs flex items-center gap-1.5;
 }
 
 .delivery-title {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #1f2937;
-  margin-bottom: 8px;
+  @apply page-title m-0;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .delivery-subtitle {
-  font-size: 1rem;
-  color: #6b7280;
+  @apply text-sm text-slate-400 font-semibold mt-1;
 }
 
-/* Success Message */
 .success-message {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 20px;
-  background: #d1fae5;
-  border: 2px solid #10b981;
-  border-radius: 12px;
-  color: #065f46;
-  font-weight: 600;
-  margin-bottom: 24px;
-  animation: slideDown 0.3s ease;
+  padding: 1rem 1.25rem;
+  @apply bg-emerald-50 text-emerald-700 border border-emerald-100/85 rounded-2xl font-bold text-sm mb-6;
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideDown {
@@ -70,29 +44,25 @@
   }
 }
 
-/* Section */
 .delivery-section {
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .section-title {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #374151;
-  margin-bottom: 16px;
+  gap: 0.5rem;
+  @apply text-sm font-bold text-slate-800 tracking-tight mb-6 pb-4 border-b border-slate-50;
 }
 
 .section-title svg {
   color: #4f46e5;
 }
 
-/* Mobile Responsive */
 @media (max-width: 640px) {
   .delivery-page {
-    padding: 16px;
+    padding: 1rem;
   }
 
   .delivery-title {
@@ -118,7 +88,6 @@
   }
 }
 
-/* Animations */
 .delivery-section {
   animation: fadeIn 0.4s ease;
 }

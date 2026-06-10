@@ -132,50 +132,46 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen, isActivePath, societyName }
     <>
       {/* Mobile Overlay */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
-      
+
       {/* Sidebar */}
-      <aside className={`fixed left-0 top-0 h-full bg-slate-900 z-50 transition-all duration-300 ${
-        sidebarOpen ? 'w-64 translate-x-0' : 'w-64 -translate-x-full lg:translate-x-0 lg:w-20'
-      }`}>
+      <aside className={`fixed left-0 top-0 h-full bg-slate-950 border-r border-slate-900/60 z-50 transition-all duration-300 ${sidebarOpen ? 'w-64 translate-x-0' : 'w-64 -translate-x-full lg:translate-x-0 lg:w-20'
+        }`}>
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-slate-800">
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+        <div className="h-16 flex items-center px-6 border-b border-slate-900">
+          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md shadow-indigo-500/20">
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
           </div>
-          <span className={`ml-3 text-white font-semibold text-lg transition-opacity duration-200 truncate max-w-[180px] ${
-            sidebarOpen ? 'opacity-100' : 'opacity-0 lg:hidden'
-          }`} title={societyName || 'SocietyPro'}>
+          <span className={`ml-3 text-white font-semibold text-[15px] tracking-tight transition-opacity duration-200 truncate max-w-[180px] ${sidebarOpen ? 'opacity-100' : 'opacity-0 lg:hidden'
+            }`} title={societyName || 'SocietyPro'}>
             {societyName || 'SocietyPro'}
           </span>
         </div>
 
         {/* Navigation */}
-        <nav className="mt-6 px-3">
+        <nav className="mt-6 px-3 h-[calc(100vh-140px)] overflow-y-auto">
           <ul className="space-y-1">
             {menuItems.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
                   onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
-                    checkActive(item.path) 
-                      ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-500/30' 
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                  }`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-250 group ${checkActive(item.path)
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/10'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-900/60'
+                    }`}
                 >
-                  <span className={`transition-transform duration-200 ${checkActive(item.path) ? '' : 'group-hover:scale-110'}`}>
+                  <span className={`transition-transform duration-250 ${checkActive(item.path) ? '' : 'group-hover:scale-105'}`}>
                     {item.icon}
                   </span>
-                  <span className={`font-medium transition-opacity duration-200 ${
-                    sidebarOpen ? 'opacity-100' : 'opacity-0 lg:hidden'
-                  }`}>
+                  <span className={`text-[13px] font-semibold tracking-wide transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 lg:hidden'
+                    }`}>
                     {item.label}
                   </span>
                 </Link>
@@ -185,16 +181,15 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen, isActivePath, societyName }
         </nav>
 
         {/* Bottom Section */}
-        <div className={`absolute bottom-0 left-0 right-0 p-4 border-t border-slate-800 transition-opacity duration-200 ${
-          sidebarOpen ? 'opacity-100' : 'opacity-0 lg:hidden'
-        }`}>
-          <div className="flex items-center gap-3 text-slate-400 text-sm">
-            <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
+        <div className={`absolute bottom-0 left-0 right-0 p-4 border-t border-slate-900 transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 lg:hidden'
+          }`}>
+          <div className="flex items-center gap-3 text-slate-500 text-xs">
+            <div className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <span>v1.0.0</span>
+            <span className="font-semibold tracking-wider">v1.0.0</span>
           </div>
         </div>
       </aside>

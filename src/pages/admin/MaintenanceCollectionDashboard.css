@@ -1,145 +1,101 @@
 .maintenance-collection-dashboard {
-  padding: 2rem;
+  padding: 2.5rem;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+.maintenance-collection-dashboard .dashboard-header {
+  @apply page-header;
 }
 
-.dashboard-header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0;
+.maintenance-collection-dashboard .dashboard-header h1 {
+  @apply page-title;
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .btn-refresh {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  @apply btn-modern-secondary px-4 py-2.5;
 }
 
-.btn-refresh:hover {
-  transform: translateY(-2px);
+.maintenance-collection-dashboard .stats-grid {
+  @apply grid gap-6 mb-8;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+.maintenance-collection-dashboard .stat-card {
+  @apply stat-card-modern;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
 }
 
-.stat-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.maintenance-collection-dashboard .stat-card h3 {
+  @apply stat-label-modern;
 }
 
-.stat-card h3 {
-  color: #6b7280;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.stat-card .stat-value {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
+.maintenance-collection-dashboard .stat-card .stat-value {
+  @apply stat-value-modern mt-2;
 }
 
 .stat-card.revenue .stat-value {
-  color: #10b981;
+  @apply text-emerald-600;
 }
 
 .stat-card.pending .stat-value {
-  color: #f59e0b;
+  @apply text-amber-600;
 }
 
 .stat-card.active .stat-value {
-  color: #3b82f6;
+  @apply text-indigo-600;
 }
 
 .stat-card.blocked .stat-value {
-  color: #ef4444;
+  @apply text-rose-600;
 }
 
 .stat-card.total .stat-value {
-  color: #8b5cf6;
+  @apply text-slate-800;
 }
 
 .societies-table-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  @apply glass-card p-8;
 }
 
 .societies-table-container h2 {
-  color: #1f2937;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  @apply text-lg font-bold text-slate-800 tracking-tight mb-6;
 }
 
 .societies-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.societies-table thead {
-  background: #f9fafb;
+  @apply table-modern;
 }
 
 .societies-table th {
-  padding: 1rem;
-  text-align: left;
-  font-weight: 600;
-  color: #374151;
-  border-bottom: 2px solid #e5e7eb;
+  @apply px-4 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider bg-slate-50/50 border-b border-slate-100;
 }
 
 .societies-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  @apply px-4 py-4.5 text-sm text-slate-600 border-b border-slate-100/80;
 }
 
 .societies-table tbody tr:hover {
-  background: #f9fafb;
+  @apply bg-slate-50/40;
 }
 
-.status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+.maintenance-collection-dashboard .status-badge {
+  @apply px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider inline-block;
 }
 
-.status-badge.active {
-  background: #d1fae5;
-  color: #065f46;
+.maintenance-collection-dashboard .status-badge.active {
+  @apply bg-emerald-50 text-emerald-700 border border-emerald-100;
 }
 
-.status-badge.expired {
-  background: #fee2e2;
-  color: #991b1b;
+.maintenance-collection-dashboard .status-badge.expired {
+  @apply bg-rose-50 text-rose-700 border border-rose-100;
 }
 
-.status-badge.blocked {
-  background: #fef3c7;
-  color: #92400e;
+.maintenance-collection-dashboard .status-badge.blocked {
+  @apply bg-amber-50 text-amber-700 border border-amber-100;
 }
 
 .action-buttons {
@@ -152,49 +108,23 @@
 .btn-amount,
 .btn-block,
 .btn-unblock {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
+  @apply px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 active:scale-[0.98] cursor-pointer;
 }
 
 .btn-payment {
-  background: #10b981;
-  color: white;
-}
-
-.btn-payment:hover {
-  background: #059669;
+  @apply bg-emerald-50 text-emerald-700 border border-emerald-200/60 hover:bg-emerald-100;
 }
 
 .btn-amount {
-  background: #3b82f6;
-  color: white;
-}
-
-.btn-amount:hover {
-  background: #2563eb;
+  @apply bg-indigo-50 text-indigo-700 border border-indigo-200/60 hover:bg-indigo-100;
 }
 
 .btn-block {
-  background: #ef4444;
-  color: white;
-}
-
-.btn-block:hover {
-  background: #dc2626;
+  @apply bg-rose-50 text-rose-700 border border-rose-200/60 hover:bg-rose-100;
 }
 
 .btn-unblock {
-  background: #10b981;
-  color: white;
-}
-
-.btn-unblock:hover {
-  background: #059669;
+  @apply bg-emerald-50 text-emerald-700 border border-emerald-200/60 hover:bg-emerald-100;
 }
 
 /* Modal Styles */
@@ -204,17 +134,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .modal-content {
-  background: white;
-  border-radius: 12px;
+  @apply bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl shadow-2xl;
   max-width: 500px;
   width: 100%;
   max-height: 90vh;
@@ -222,106 +152,57 @@
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  @apply flex justify-between items-center px-6 py-4 border-b border-slate-100;
 }
 
 .modal-header h2 {
-  margin: 0;
-  color: #1f2937;
-  font-size: 1.25rem;
+  @apply text-sm font-bold text-slate-800 tracking-tight m-0;
 }
 
 .close-btn {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: #6b7280;
-  padding: 0;
-  line-height: 1;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.close-btn:hover {
-  background: #f3f4f6;
-  color: #1f2937;
+  @apply text-slate-400 hover:text-slate-700 transition-colors leading-none p-0;
 }
 
 .modal-body {
-  padding: 1.5rem;
+  @apply p-6;
 }
 
 .modal-body p {
-  color: #374151;
-  margin-bottom: 1rem;
+  @apply text-sm text-slate-500 font-medium mb-3;
 }
 
-.form-group {
-  margin-bottom: 1rem;
+.modal-body strong {
+  @apply text-slate-800 font-semibold;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #374151;
+.maintenance-collection-dashboard .form-group {
+  margin-bottom: 1.25rem;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: #ffffff;
+.maintenance-collection-dashboard .form-group label {
+  @apply block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2;
 }
 
-.form-actions {
+.maintenance-collection-dashboard .form-group input {
+  @apply input-modern;
+}
+
+.maintenance-collection-dashboard .form-actions {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.btn-primary {
-  flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+.maintenance-collection-dashboard .btn-primary {
+  @apply flex-1 btn-modern-primary;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  flex: 1;
-  background: #6b7280;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.btn-secondary:hover {
-  background: #4b5563;
+.maintenance-collection-dashboard .btn-secondary {
+  @apply flex-1 btn-modern-secondary;
 }
 
 @media (max-width: 768px) {
