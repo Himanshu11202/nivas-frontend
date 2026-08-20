@@ -33,7 +33,7 @@
 }
 
 .welcome-section {
-  @apply glass-card p-8 mb-8 animate-slide-up;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 mb-8 animate-slide-up;
 }
 
 .welcome-title {
@@ -67,7 +67,7 @@
 }
 
 .stat-card {
-  @apply stat-card-modern;
+  @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out p-6 relative overflow-hidden;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
 }
 
@@ -102,12 +102,12 @@
 .stat-icon.visitors { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
 
 .stat-info h3 {
-  @apply stat-value-modern mt-1;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight mb-1 mt-1;
   color: #0f172a;
 }
 
 .stat-info p {
-  @apply stat-label-modern;
+  @apply text-sm font-semibold text-slate-400;
 }
 
 .stat-change {
@@ -125,7 +125,7 @@
 }
 
 .dashboard-card {
-  @apply glass-card p-6;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-6;
 }
 
 .card-header {
@@ -181,7 +181,7 @@
 }
 
 .wing-label {
-  @apply text-xs font-bold text-slate-500 uppercase tracking-wider min-width-[60px];
+  @apply text-xs font-bold text-slate-500 uppercase tracking-wider min-w-[60px];
 }
 
 .wing-progress {
@@ -197,7 +197,7 @@
 }
 
 .wing-count {
-  @apply text-[11px] font-bold text-slate-400 min-width-[40px] text-right;
+  @apply text-[11px] font-bold text-slate-400 min-w-[40px] text-right;
 }
 
 .dashboard-content {

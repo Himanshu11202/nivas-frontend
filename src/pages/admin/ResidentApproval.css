@@ -5,11 +5,11 @@
 }
 
 .resident-approval .page-header {
-  @apply page-header;
+  @apply mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4;
 }
 
 .resident-approval .page-header h2 {
-  @apply page-title;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight;
   background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -30,19 +30,19 @@
 }
 
 .resident-approval .empty-state {
-  @apply empty-state;
+  @apply flex flex-col items-center justify-center p-16 text-center bg-white/40 backdrop-blur-md rounded-3xl border border-white/50 shadow-sm;
 }
 
 .resident-approval .empty-icon {
-  @apply empty-state-icon;
+  @apply w-24 h-24 mb-6 text-slate-300 transition-transform duration-300 hover:scale-110;
 }
 
 .resident-approval .empty-state h3 {
-  @apply empty-state-title;
+  @apply text-xl font-bold text-slate-800 mb-2;
 }
 
 .resident-approval .empty-state p {
-  @apply empty-state-desc;
+  @apply text-sm text-slate-500 max-w-md;
 }
 
 .residents-grid {
@@ -51,7 +51,7 @@
 }
 
 .resident-card {
-  @apply modern-card p-6 border-l-4 border-l-amber-500 bg-white/80;
+  @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out p-6 border-l-4 border-l-amber-500 bg-white/80;
 }
 
 .resident-header {
@@ -116,11 +116,11 @@
 }
 
 .btn-approve {
-  @apply flex-1 btn-modern bg-emerald-600 hover:bg-emerald-700 text-white py-2 text-xs shadow-sm shadow-emerald-600/10;
+  @apply flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-emerald-600 hover:bg-emerald-700 text-white py-2 text-xs shadow-sm shadow-emerald-600/10;
 }
 
 .btn-reject {
-  @apply flex-1 btn-modern bg-rose-600 hover:bg-rose-700 text-white py-2 text-xs shadow-sm shadow-rose-600/10;
+  @apply flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-rose-600 hover:bg-rose-700 text-white py-2 text-xs shadow-sm shadow-rose-600/10;
 }
 
 @media (max-width: 768px) {

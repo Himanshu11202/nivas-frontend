@@ -13,11 +13,11 @@
 }
 
 .society-details-page .page-header {
-  @apply page-header;
+  @apply mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4;
 }
 
 .society-details-page .page-header h1 {
-  @apply page-title;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight;
   background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -30,15 +30,15 @@
 }
 
 .btn-back {
-  @apply btn-modern-secondary px-4 py-2.5;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300 px-4 py-2.5;
 }
 
 .btn-paid {
-  @apply btn-modern bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/10;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/10;
 }
 
 .btn-delete {
-  @apply btn-modern bg-rose-600 hover:bg-rose-700 text-white shadow-md shadow-rose-600/10;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-rose-600 hover:bg-rose-700 text-white shadow-md shadow-rose-600/10;
 }
 
 /* Status Banner */
@@ -74,16 +74,16 @@
 }
 
 .society-details-page .stat-card {
-  @apply stat-card-modern;
+  @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out p-6 relative overflow-hidden;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
 }
 
 .society-details-page .stat-card h3 {
-  @apply stat-label-modern;
+  @apply text-sm font-semibold text-slate-400;
 }
 
 .society-details-page .stat-card .stat-value {
-  @apply stat-value-modern mt-2;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight mb-1 mt-2;
   color: #0f172a;
 }
 
@@ -105,7 +105,7 @@
 
 /* Charts Section */
 .charts-section {
-  @apply glass-card p-8 mb-8;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 mb-8;
 }
 
 .charts-section h2 {
@@ -238,7 +238,7 @@
 
 /* Info Section */
 .info-section {
-  @apply glass-card p-8 mb-8;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 mb-8;
 }
 
 .info-section h2 {
@@ -267,7 +267,7 @@
 
 /* Admin Section */
 .society-details-page .admin-section {
-  @apply glass-card p-8 mb-8;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 mb-8;
 }
 
 .society-details-page .admin-section h2 {
@@ -294,7 +294,7 @@
 
 /* Members Section */
 .members-section {
-  @apply glass-card p-8;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8;
 }
 
 .members-section h2 {
@@ -385,11 +385,11 @@
 }
 
 .btn-confirm-delete {
-  @apply flex-1 btn-modern bg-rose-600 hover:bg-rose-700 text-white;
+  @apply flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-rose-600 hover:bg-rose-700 text-white;
 }
 
 .btn-cancel {
-  @apply flex-1 btn-modern-secondary;
+  @apply flex-1 px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300;
 }
 
 @media (max-width: 768px) {

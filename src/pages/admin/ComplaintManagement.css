@@ -5,11 +5,11 @@
 }
 
 .complaint-management .page-header {
-  @apply page-header;
+  @apply mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4;
 }
 
 .complaint-management .page-header h2 {
-  @apply page-title;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight;
   background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -38,27 +38,27 @@
 }
 
 .complaints-container {
-  @apply glass-card p-8 overflow-hidden;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 overflow-hidden;
 }
 
 .complaint-management .empty-state {
-  @apply empty-state;
+  @apply flex flex-col items-center justify-center p-16 text-center bg-white/40 backdrop-blur-md rounded-3xl border border-white/50 shadow-sm;
 }
 
 .complaint-management .empty-icon {
-  @apply empty-state-icon;
+  @apply w-24 h-24 mb-6 text-slate-300 transition-transform duration-300 hover:scale-110;
 }
 
 .complaint-management .empty-state h3 {
-  @apply empty-state-title;
+  @apply text-xl font-bold text-slate-800 mb-2;
 }
 
 .complaint-management .empty-state p {
-  @apply empty-state-desc;
+  @apply text-sm text-slate-500 max-w-md;
 }
 
 .complaints-table {
-  @apply table-modern overflow-x-auto;
+  @apply w-full border-collapse overflow-x-auto;
 }
 
 .complaints-table table {

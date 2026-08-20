@@ -70,16 +70,16 @@ body {
     @apply focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98];
   }
   .btn-modern-primary {
-    @apply btn-modern bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/10 hover:shadow-lg hover:shadow-slate-900/20;
+    @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/10 hover:shadow-lg hover:shadow-slate-900/20;
   }
   .btn-modern-secondary {
-    @apply btn-modern bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300;
+    @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300;
   }
   .btn-modern-danger {
-    @apply btn-modern bg-rose-600 text-white hover:bg-rose-700 shadow-md shadow-rose-600/10 hover:shadow-lg;
+    @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-rose-600 text-white hover:bg-rose-700 shadow-md shadow-rose-600/10 hover:shadow-lg;
   }
   .btn-modern-success {
-    @apply btn-modern bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-600/10 hover:shadow-lg;
+    @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-600/10 hover:shadow-lg;
   }
 
   /* Status Badges */
@@ -139,11 +139,11 @@ body {
     @apply w-full border-collapse;
   }
   .table-modern th {
-    @apply px-6 py-4.5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider;
+    @apply px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider;
     @apply bg-slate-50/50 border-b border-slate-100;
   }
   .table-modern td {
-    @apply px-6 py-4.5 text-sm text-slate-600 border-b border-slate-100/80;
+    @apply px-6 py-4 text-sm text-slate-600 border-b border-slate-100/80;
   }
   .table-modern tbody tr { 
     @apply transition-colors duration-200; 
@@ -168,7 +168,7 @@ body {
 
   /* Premium Stats Cards */
   .stat-card-modern { 
-    @apply modern-card p-6 relative overflow-hidden; 
+    @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out p-6 relative overflow-hidden; 
   }
   .stat-icon-modern { 
     @apply w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-white shadow-md; 
@@ -208,11 +208,11 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 /* Legacy compatibility classes mapping */
-.glass-card { @apply modern-card; }
-.btn-primary { @apply btn-modern-primary; }
-.dashboard-card { @apply modern-card; }
-.card-hover { @apply modern-card; }
-.stat-number { @apply stat-value-modern; }
+.glass-card { @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out; }
+.btn-primary { @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/10 hover:shadow-lg hover:shadow-slate-900/20; }
+.dashboard-card { @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out; }
+.card-hover { @apply bg-white/70 backdrop-blur-md rounded-2xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 ease-out; }
+.stat-number { @apply text-3xl font-extrabold text-slate-900 tracking-tight mb-1; }
 
 /* Elegant Gradients */
 .gradient-text {
@@ -220,4 +220,4 @@ body {
 }
 .brand-gradient {
   @apply bg-gradient-to-tr from-indigo-600 to-violet-600;
-}
+}                 

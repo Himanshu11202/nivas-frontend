@@ -5,11 +5,11 @@
 }
 
 .worker-management .page-header {
-  @apply page-header;
+  @apply mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4;
 }
 
 .worker-management .page-header h2 {
-  @apply page-title;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight;
   background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -17,7 +17,7 @@
 }
 
 .worker-form-container {
-  @apply glass-card p-8 mb-8 animate-slide-up;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 mb-8 animate-slide-up;
 }
 
 .worker-form h3 {
@@ -41,7 +41,7 @@
 }
 
 .form-input {
-  @apply input-modern;
+  @apply w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white/50 backdrop-blur-sm transition-all duration-300 ease-out focus:outline-none focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10;
 }
 
 .form-actions {
@@ -51,15 +51,15 @@
 }
 
 .worker-management .btn-primary {
-  @apply btn-modern-primary px-6 py-2.5 text-xs;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/10 hover:shadow-lg hover:shadow-slate-900/20 px-6 py-2.5 text-xs;
 }
 
 .worker-management .btn-secondary {
-  @apply btn-modern-secondary px-6 py-2.5 text-xs;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300 px-6 py-2.5 text-xs;
 }
 
 .workers-table-container {
-  @apply glass-card p-8 overflow-hidden;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8 overflow-hidden;
 }
 
 .workers-table-container h3 {
@@ -71,7 +71,7 @@
 }
 
 .workers-table {
-  @apply table-modern;
+  @apply w-full border-collapse;
 }
 
 .workers-table th {
@@ -79,7 +79,7 @@
 }
 
 .workers-table td {
-  @apply px-4 py-4.5 text-sm text-slate-600 border-b border-slate-100/80;
+  @apply px-4 py-4 text-sm text-slate-600 border-b border-slate-100/80;
 }
 
 .workers-table tr:hover {

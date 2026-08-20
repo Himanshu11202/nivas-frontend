@@ -5,15 +5,15 @@
 }
 
 .guest-header {
-  @apply page-header flex-col items-start gap-4 mb-8;
+  @apply mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 flex-col items-start gap-4 mb-8;
 }
 
 .back-btn {
-  @apply btn-modern-secondary py-2 px-3 text-xs flex items-center gap-1.5;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300 py-2 px-3 text-xs flex items-center gap-1.5;
 }
 
 .guest-title {
-  @apply page-title m-0;
+  @apply text-3xl font-extrabold text-slate-900 tracking-tight m-0;
   background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -52,7 +52,7 @@
 
 .camera-section,
 .form-section {
-  @apply glass-card p-8;
+  @apply bg-white/70 backdrop-blur-lg rounded-3xl border border-white/60 shadow-[0_12px_40px_rgba(31,38,135,0.03)] transition-all duration-300 ease-out p-8;
 }
 
 .photo-capture-area {
@@ -68,11 +68,11 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  @apply text-slate-350 font-bold text-xs;
+  @apply text-slate-400 font-bold text-xs;
 }
 
 .camera-btn {
-  @apply btn-modern bg-slate-900 hover:bg-slate-800 text-white shadow-md shadow-slate-900/10 text-xs py-2.5 px-4;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-slate-900 hover:bg-slate-800 text-white shadow-md shadow-slate-900/10 text-xs py-2.5 px-4;
 }
 
 .camera-preview {
@@ -109,7 +109,7 @@
 }
 
 .cancel-btn {
-  @apply btn-modern bg-rose-600 hover:bg-rose-700 text-white text-xs py-2.5 px-4;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-rose-600 hover:bg-rose-700 text-white text-xs py-2.5 px-4;
 }
 
 .captured-photo {
@@ -132,7 +132,7 @@
 }
 
 .retake-btn {
-  @apply btn-modern-secondary text-xs py-2 px-3;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-white text-slate-700 border border-slate-200/80 hover:bg-slate-50 hover:border-slate-300 text-xs py-2 px-3;
 }
 
 .section-title {
@@ -158,7 +158,7 @@
 }
 
 .guest-form .form-input {
-  @apply input-modern;
+  @apply w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white/50 backdrop-blur-sm transition-all duration-300 ease-out focus:outline-none focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10;
 }
 
 .guest-form .form-input:disabled {
@@ -166,7 +166,7 @@
 }
 
 .submit-btn {
-  @apply btn-modern-primary py-3.5 mt-2;
+  @apply px-6 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/20 active:scale-[0.98] bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/10 hover:shadow-lg hover:shadow-slate-900/20 py-3.5 mt-2;
 }
 
 .submit-btn:disabled {

@@ -39,7 +39,6 @@ import GuardDashboard from './pages/guard/GuardDashboard';
 import NewGuardDashboard from './pages/guard/NewGuardDashboard';
 import GuestPage from './pages/guard/GuestPage';
 import DeliveryPage from './pages/guard/DeliveryPage';
-import WorkersPage from './pages/guard/WorkersPage';
 import GuardWorkerAttendance from './pages/guard/GuardWorkerAttendance';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
